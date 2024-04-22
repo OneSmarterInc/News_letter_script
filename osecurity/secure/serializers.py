@@ -5,3 +5,5 @@ class credentialsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Credentials
         fields = '__all__'
+
+        
