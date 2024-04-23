@@ -61,6 +61,7 @@ logger = logging.getLogger(__name__)
 class AddCredentials(APIView):
     def post(self, request):
         link = request.data.get('link')
+        image_link = request.data.get('image_link')
         if not link:
             return Response({"detail": "No link provided."}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -81,7 +82,7 @@ class AddCredentials(APIView):
         soup = BeautifulSoup(response.text, 'html.parser')
         title = soup.title.string if soup.title else "No title found"
         
-        cred = Credentials(link=link, title=title)
+        cred = Credentials(link=link, title=title, image_link= image_link)
         cred.save()
         
         serializer = credentialsSerializer(cred)
