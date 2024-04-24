@@ -25,6 +25,15 @@ class Sign_in(APIView):
         access_token = str(refresh.access_token)
         return Response({"access_token": access_token}, status=status.HTTP_200_OK)
 
+class Sign_Out(APIView):
+    def post(self,request):
+        data = request.data
+        username = data.get('username')
+        request.session['user_signed_in'] = False
+        return Response('user signed out')
+
+
+# @authentication_classes([TokenAuthentication])
 
 # class add_Credentials(APIView):
 #     def post(self,request):
